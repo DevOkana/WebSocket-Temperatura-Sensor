@@ -6,11 +6,11 @@
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
 #include <AsyncWebSocket.h>
-
+#include <Arduino.h>
 
 extern unsigned long periodoEspera;
 extern DHT22 dht22;
 
 void onWebSocketEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type, void *arg, uint8_t *data, size_t len);
-void getDatosDHT22(long periodo, float ajustarTemperatura, float ajustarHumedad);
+String getDatosDHT22(long periodo, float ajustarTemperatura, float ajustarHumedad);
 #endif // Cierre del ifndef

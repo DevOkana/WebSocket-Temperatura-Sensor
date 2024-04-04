@@ -1,28 +1,18 @@
-import websocket
-import time
+import asyncio
+import websockets
 
-# URL del servidor WebSocket
-url = "ws://192.168.0.82:80/ws"  # Reemplaza <dirección_ip_servidor> con la dirección IP de tu servidor
+async def send_command(websocket):
+    while True:
+        command = input("Ingrese el comando a enviar al servidor (o 'exit' para salir): ")
+        if command.lower() == "exit":
+            break
+        await websocket.send(command)
+        response = await websocket.recv()
+        print("Respuesta del servidor:", response)
 
-def on_message(ws, message):
-    print("Mensaje recibido:", message)
+async def main():
+    uri = "ws://192.168.0.82:80/ws"
+    async with websockets.connect(uri) as websocket:
+        await send_command(websocket)
 
-def on_error(ws, error):
-    print("Error:", error)
-
-def on_close(ws):
-    print("Conexión cerrada")
-
-def on_open(ws):
-    print("Conexión abierta")
-    # Puedes enviar un mensaje al servidor una vez que la conexión esté abierta
-    # ws.send("Hola desde Python")
-
-if __name__ == "__main__":
-    # Configurar el cliente WebSocket
-    websocket.enableTrace(True)
-    ws = websocket.WebSocketApp(url, on_message=on_message, on_error=on_error, on_close=on_close)
-    ws.on_open = on_open
-
-    # Conectar al servidor
-    ws.run_forever()
+asyncio.run(main())

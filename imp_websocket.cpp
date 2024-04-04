@@ -14,9 +14,16 @@ void onWebSocketEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsE
       }
       Serial.print("Mensaje recibido: ");
       Serial.println(msg);
-
-      // Envía un mensaje de vuelta al cliente
-      client->text("Mensaje recibido por el servidor: " + msg);
+      
+      // Verificar el comando recibido
+      if (msg == "tmp") {
+        // Obtener los datos del sensor DHT22
+        String datosDHT22 = getDatosDHT22(periodoEspera, 0, 0);
+        client->text(datosDHT22);
+      } else {
+        // Comando no reconocido, enviar un mensaje de error al cliente
+        client->text("Comando no reconocido");
+      }
     }
   }
 }

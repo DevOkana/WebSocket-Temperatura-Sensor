@@ -31,9 +31,4 @@ void setup() {
 }
 
 void loop() {
-  if (comenzar == true) {
-    getDatosDHT22(periodoEspera,0,0);
-  } else {
-    Serial.println("Intentando conexión");
-  }
 }
