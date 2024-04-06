@@ -14,6 +14,7 @@ async def send_command(websocket):
             }
             await websocket.send(json.dumps({"command": "config_wifi", "data": config_data}))
             print(F"Comando '{command.lower()}' enviado al servidor.")
+            
         elif command.lower() == "tmp":
             await websocket.send(json.dumps({"command": "tmp"}))
             print(f"Comando '{command.lower()}' enviado al servidor.")

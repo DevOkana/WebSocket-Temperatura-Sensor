@@ -1,22 +1,26 @@
 import socket
 import asyncio
 import websockets
+import json
 
 async def connect_to_websocket(uri):
     try:
         async with websockets.connect(uri) as websocket:
             print("Conexión establecida con el servidor WebSocket en", uri)
             # Aquí puedes enviar y recibir mensajes con el servidor WebSocket según tus necesidades
-            await websocket.send("tmp")
+            await websocket.send(json.dumps({"command": "test"}))
             response = await websocket.recv()
-            print("Respuesta del servidor:", response)
+            if (response == "okay"):
+                print("Server Encontrado")
+                return
+                
     except websockets.exceptions.InvalidURI:
         print("URI WebSocket no válida:", uri)
     except ConnectionRefusedError:
         print("No se pudo conectar al servidor WebSocket en", uri)
 
 async def scan_for_websockets():
-    for i in range(80, 85):  # Escanea las direcciones IP de 192.168.1.1 a 192.168.1.254
+    for i in range(70, 90):  # Escanea las direcciones IP de 192.168.1.1 a 192.168.1.254
         host = f"192.168.0.{i}"
         uri = f"ws://{host}:80/ws"
         try:

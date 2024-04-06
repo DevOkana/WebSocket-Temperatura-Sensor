@@ -34,7 +34,7 @@ void onWebSocketEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsE
       Serial.print("Mensaje recibido: ");
       Serial.println(msg);
       
-
+      
       // Verificar si hubo un error al parsear el JSON
       if (error) {
         Serial.print("Error al parsear JSON: ");
@@ -66,6 +66,11 @@ void onWebSocketEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsE
         String enviar = getDatosDHT22(2000, 0, 0); 
         client->text(enviar);
         Serial.println(enviar);
+      }else if (strcmp(comm,"test") == 0)
+      {
+          client->text("okay");
+      }else{
+        client->text("Comando no Encontrado");
       }
     }
   }
