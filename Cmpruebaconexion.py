@@ -1,12 +1,25 @@
 import asyncio
 import websockets
+import json
 
 async def send_command(websocket):
     while True:
         command = input("Ingrese el comando a enviar al servidor (o 'exit' para salir): ")
         if command.lower() == "exit":
             break
-        await websocket.send(command)
+        elif command.lower() == "config_wifi":
+            config_data = {
+                "ssid": "(((Mariola)))",
+                "password": "Resiliencia1*"
+            }
+            await websocket.send(json.dumps({"command": "config_wifi", "data": config_data}))
+            print(F"Comando '{command.lower()}' enviado al servidor.")
+        elif command.lower() == "tmp":
+            await websocket.send(json.dumps({"command": "tmp"}))
+            print(f"Comando '{command.lower()}' enviado al servidor.")
+        else:
+            await websocket.send(command)
+            print(f"Comando '{command}' enviado al servidor.")
         response = await websocket.recv()
         print("Respuesta del servidor:", response)
 

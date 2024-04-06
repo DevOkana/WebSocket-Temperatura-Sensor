@@ -5,7 +5,7 @@
 
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
-char *ssid = "(((Mariola))";
+char *ssid = "(((Mariola)))";
 char *password = "Resiliencia1*";
 const char *hostssid = "HosportTemperatura";      // Nombre del punto de acceso
 const char *hostpassword = "";
