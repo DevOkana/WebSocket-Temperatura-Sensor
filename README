@@ -1,10 +1,12 @@
 # WebSocket-Temperatura-Sensor
-Este es un proyecto creado con un esp32 con un sensor DHT22 para enviar los datos de la temperatura y la húmeda a un cliente mediante WebSocket.
 
-## Crear un archivo config.h donde tendremos el ssid y el password por defecto, ejemplo de ello en config_template.h
+Este es un proyecto creado con un esp32 con un sensor DHT22 para enviar los datos de la temperatura y la humedad a un cliente mediante WebSocket.
 
+## Configuración
 
-```C
+1. Crear un archivo `config.h` donde tendrás el SSID y la contraseña por defecto. Aquí tienes un ejemplo de cómo debería verse:
+
+\```C
 #ifndef CONFIG_H
 #define CONFIG_H
 
@@ -12,17 +14,26 @@ char *ssid = "NombreDelaWIfi";
 char *password = "Contraseña";
 
 #endif
-```
+\```
 
+2. Define el pin por el cual el ESP32 va a recibir los datos de entrada del sensor de temperatura:
 
-### Definir el pin por el cual el esp32 va a recibir los datos de entrada del sensor de temperatura
-
-```C
+\```C
 #define pinDHT22 27
-```
+\```
 
-### Definir el puerto a utilizar en este caso el puerto 80
+3. Define el puerto a utilizar, en este caso, el puerto 80:
 
-```C
+\```C
 AsyncWebServer server(80); //Puerto 80
-```
+\```
+
+## Contribución
+
+Si deseas contribuir a este proyecto, por favor sigue estas instrucciones:
+
+1. Haz un fork del proyecto
+2. Crea una nueva rama (`git checkout -b feature/nueva-caracteristica`)
+3. Haz commit de tus cambios (`git commit -am 'Añadir nueva característica'`)
+4. Haz push a la rama (`git push origin feature/nueva-caracteristica`)
+5. Crea un nuevo Pull Request
