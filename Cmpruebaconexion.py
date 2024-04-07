@@ -9,12 +9,18 @@ async def send_command(websocket):
             break
         elif command.lower() == "config_wifi":
             config_data = {
-                "ssid": "(((Mariola)))",
-                "password": "Resiliencia1*"
+                "ssid": "nombre",
+                "password": "password"
             }
             await websocket.send(json.dumps({"command": "config_wifi", "data": config_data}))
             print(F"Comando '{command.lower()}' enviado al servidor.")
-            
+        elif command.lower() == "config_tmp":
+            config_data = {
+                "temperatura": "1.5",
+                "password": "-15"
+            }
+            await websocket.send(json.dumps({"command": "config_tmp", "data": config_data}))
+            print(F"Comando '{command.lower()}' enviado al servidor.")          
         elif command.lower() == "tmp":
             await websocket.send(json.dumps({"command": "tmp"}))
             print(f"Comando '{command.lower()}' enviado al servidor.")
