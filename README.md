@@ -6,34 +6,25 @@ Este es un proyecto creado con un esp32 con un sensor DHT22 para enviar los dato
 
 1. Crear un archivo `config.h` donde tendrás el SSID y la contraseña por defecto. Aquí tienes un ejemplo de cómo debería verse:
 
-\```C
+```C
 #ifndef CONFIG_H
 #define CONFIG_H
 
-char *ssid = "NombreDelaWIfi";
+char *ssid = "NombreDelaWifi";
 char *password = "Contraseña";
 
 #endif
-\```
+```
 
 2. Define el pin por el cual el ESP32 va a recibir los datos de entrada del sensor de temperatura:
 
-\```C
+```C
 #define pinDHT22 27
-\```
+```
 
 3. Define el puerto a utilizar, en este caso, el puerto 80:
 
-\```C
+```C
 AsyncWebServer server(80); //Puerto 80
-\```
+```
 
-## Contribución
-
-Si deseas contribuir a este proyecto, por favor sigue estas instrucciones:
-
-1. Haz un fork del proyecto
-2. Crea una nueva rama (`git checkout -b feature/nueva-caracteristica`)
-3. Haz commit de tus cambios (`git commit -am 'Añadir nueva característica'`)
-4. Haz push a la rama (`git push origin feature/nueva-caracteristica`)
-5. Crea un nuevo Pull Request
