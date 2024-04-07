@@ -1,5 +1,6 @@
 #ifndef DECLARACION_H
 #define DECLARACION_H
+
 #define pinDHT22 27
 
 #include <DHT22.h>
@@ -23,7 +24,7 @@ enum WifiConfigState
   WAITING_COMMAND,
   WAITING_NAME,
   WAITING_PASSWORD,
-  WAITING_CONFIG // Asegúrate de que esta línea esté presente
+  WAITING_CONFIG 
 };
 
 #endif // Cierre del ifndef
