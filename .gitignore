@@ -1,4 +1,5 @@
 config.h
+config.cpp
 __pycache__
 .idea
 .vscode

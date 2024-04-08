@@ -12,12 +12,27 @@
 #include <WiFi.h>
 #include <ArduinoJson.h>
 
+/*
+* Declaración de tiempo de espera que se usará para que el cliente le diga al sensor
+* cada cuanto tiempo quiere recibir la actualización del sensor
+*/
 
-extern unsigned long periodoEspera;
-extern DHT22 dht22;
+extern AsyncWebSocket ws;
+extern AsyncWebServer server;
+extern const char *hostssid;
+extern const char *hostpassword;
 
+extern char *ssid;
+extern char *password;
+
+
+
+void createHostport();
+int ConectarWifi(char *ssid, char *password);
 void onWebSocketEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type, void *arg, uint8_t *data, size_t len);
 String getDatosDHT22(long periodo, float ajustarTemperatura, float ajustarHumedad);
+
+
 
 enum WifiConfigState
 {
