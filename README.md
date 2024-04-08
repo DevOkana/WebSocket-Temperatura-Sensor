@@ -19,8 +19,9 @@ Este es una aplicación desarrollada para un dispositivo basado en ESP32 que per
    - Los comando serás enviado como clave primaria.
         - Algunos comando disponibles 
             - `config_wifi` este comando le enviará al dispositivo una configuración de wifi para cambiar
-               - Ejemplo ```json 
-                    {
+               - Ejemplo:
+               ```json
+                {
                 "command": "config_wifi",
                 "data": {
                   "ssid": "nombreWifi",
@@ -29,8 +30,9 @@ Este es una aplicación desarrollada para un dispositivo basado en ESP32 que per
                 }
                ```
             - `config_tmp` este comando es para ajustar los datos recibidos, para reducir la temperatura o húmedad en caso de que queremos sincronizarlo con algún otro sensor de casa.
-                - Ejemplo ```json 
-                    {
+                - Ejemplo 
+                ```json 
+                {
                 "command": "config_tmp",
                 "data": {
                   "temperatura": "nombreWifi",
@@ -38,7 +40,7 @@ Este es una aplicación desarrollada para un dispositivo basado en ESP32 que per
                     }
                 }
                 ```
-                - En caso de que querramos reducirla en -5 grados pues es tan simple indicarle en la clave de temperatura -5.
+                - En caso de que querramos reducirla en -5 grados pues es tan simple como indicarle en la clave de temperatura -5.
             - `test` este comando aún esta en desarrollo, su funcionalidad es para detectar el dispositivo en una red para que el cliente le envie este comando y el le responda pero aún falta algunos detalles -> AÚN POR DESARROLLAR
 
 ## Configuración
