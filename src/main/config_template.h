@@ -4,5 +4,4 @@
 char *ssid = "Nombre";
 char *password = "Password";
 
-
 #endif

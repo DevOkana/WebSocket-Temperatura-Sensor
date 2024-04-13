@@ -11,6 +11,8 @@
 #include <SPIFFS.h>
 #include <WiFi.h>
 #include <ArduinoJson.h>
+#include <ESP32Time.h>
+
 
 /*
 * Declaración de tiempo de espera que se usará para que el cliente le diga al sensor
@@ -21,9 +23,16 @@ extern AsyncWebSocket ws;
 extern AsyncWebServer server;
 extern const char *hostssid;
 extern const char *hostpassword;
+extern ESP32Time rtc;
 
 extern char *ssid;
 extern char *password;
+extern char *ntpServer;
+
+extern ESP32Time rtc;
+extern struct tm timeinfo;
+extern long gmtOffset_se;
+extern int daylightOffset;
 
 
 
@@ -31,7 +40,8 @@ void createHostport();
 int ConectarWifi(char *ssid, char *password);
 void onWebSocketEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type, void *arg, uint8_t *data, size_t len);
 String getDatosDHT22(long periodo, float ajustarTemperatura, float ajustarHumedad);
-
+String MostrarHora(String formato, int update);
+void startServerNtp(long gmtOffset_sec,int daylightOffset);
 
 
 enum WifiConfigState
