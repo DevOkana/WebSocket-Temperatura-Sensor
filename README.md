@@ -52,6 +52,7 @@ Este es una aplicación desarrollada para un dispositivo basado en ESP32 que per
 
 char *ssid = "NombreDelaWifi";
 char *password = "Contraseña";
+char *ntpServer = "serverNtp";
 
 ```
 
