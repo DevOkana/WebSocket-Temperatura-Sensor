@@ -27,4 +27,5 @@ void setup() {
 
 void loop() {
   Serial.println(MostrarHora(formatoFecha, 5000));
+  Serial.println(getDatosDHT22(2000,0,0));
 }

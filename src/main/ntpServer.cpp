@@ -3,11 +3,11 @@
 
 ESP32Time rtc(3600);
 
-void startServerNtp(long gmtOffset_sec,int daylightOffset){
-    gmtOffset_sec = gmtOffset_sec * 3600;
-    
-    configTime(gmtOffset_sec,daylightOffset,ntpServer);
+//Llevar el control de la temperatura y humedad según el horario en caso de que se quiera almacenar en un dispositivo.
 
+void startServerNtp(long gmtOffset_sec,int daylightOffset){
+    gmtOffset_sec = gmtOffset_sec * 3600;    
+    configTime(gmtOffset_sec,daylightOffset,ntpServer);
     // Actualizar el cliente NTP cada cierto tiempo
     //clientTime.update();
     struct tm timeinfo;
