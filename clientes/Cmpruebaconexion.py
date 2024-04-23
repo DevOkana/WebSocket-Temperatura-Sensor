@@ -16,8 +16,8 @@ async def send_command(websocket):
             print(F"Comando '{command.lower()}' enviado al servidor.")
         elif command.lower() == "config_tmp":
             config_data = {
-                "temperatura": "1.5",
-                "password": "-15"
+                "temperatura": "-2",
+                "password": "-1"
             }
             await websocket.send(json.dumps({"command": "config_tmp", "data": config_data}))
             print(F"Comando '{command.lower()}' enviado al servidor.")          
