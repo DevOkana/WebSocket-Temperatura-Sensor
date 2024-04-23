@@ -19,5 +19,5 @@ const unsigned char serverntp [60] PROGMEM = {
 
 
 void drawBitmap(int16_t x, int16_t y, const unsigned char bitmap[], int16_t width, int16_t height, uint16_t color);
-void pantalla(String date);
+void pantalla(String date,int comenzar, bool serverNTP);
 void initPantalla();

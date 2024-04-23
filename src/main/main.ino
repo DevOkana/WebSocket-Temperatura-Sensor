@@ -8,6 +8,7 @@ int comenzar; // Declaración global de comenzar para almacenar el retorno de co
 
 long gmtOffset_sec = 1;// Poner que lo extraiga de la flash del esp32 para recordar el gmt donde esta
 int daylightOffset = 0;
+bool nptserver = false;
 
 String formatoFecha = "%d/%m/%y-%H:%M:%S";
 
@@ -23,12 +24,11 @@ void setup() {
   ws.onEvent(onWebSocketEvent);
   server.addHandler(&ws); //Pasamos los datos contenido en ws
   server.begin(); 
-  startServerNtp(gmtOffset_sec,daylightOffset);  
-
+  nptserver = startServerNtp(gmtOffset_sec,daylightOffset);  
 }
 
 void loop() {
-  pantalla(MostrarHora(formatoFecha, 1000));
+  pantalla(MostrarHora(formatoFecha, 1000),comenzar, nptserver);
   //Serial.println(MostrarHora(formatoFecha, 5000));
   //Serial.println(getDatosDHT22(2000,0,0));
 }

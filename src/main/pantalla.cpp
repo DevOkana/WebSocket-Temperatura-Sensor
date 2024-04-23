@@ -8,7 +8,7 @@ void drawBitmap(int16_t x, int16_t y, const unsigned char bitmap[], int16_t widt
     display.drawBitmap(x, y, bitmap, width, height, color);
 }
 
-void pantalla(String date) {
+void pantalla(String date,int comenzar, bool serverNTP) {
   display.clearDisplay();
 
   display.setTextSize(1);
@@ -18,14 +18,18 @@ void pantalla(String date) {
   
   // Display WiFi icon
   display.setCursor(0, 0);
-  if(WiFi.status() == WL_CONNECTED){
-    drawBitmap(115, 0, wifi, 8, 8, WHITE);
+  if(comenzar == 1){
+    drawBitmap(115, 0, wifi, 8, 8, WHITE);  
   }
+    
   
   
   //drawBitmap(100, 0, serverntp, 10, 10, WHITE);
   display.print(date);
-  display.write(0x12);
+  if(serverNTP){
+    display.write(0x12);
+  }
+  
 /*
   // Formatear la hora y el minuto con dos dígitos
   String hourStr = (hour < 10 ? "0" : "") + String(hour);
@@ -52,6 +56,8 @@ void pantalla(String date) {
   display.write(0xF8);
   display.write("C");
   display.write(0x19);
+  
+  
 
   display.display(); 
 }

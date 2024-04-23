@@ -5,7 +5,7 @@ ESP32Time rtc(3600);
 
 //Llevar el control de la temperatura y humedad según el horario en caso de que se quiera almacenar en un dispositivo.
 
-void startServerNtp(long gmtOffset_sec,int daylightOffset){
+bool startServerNtp(long gmtOffset_sec,int daylightOffset){
     gmtOffset_sec = gmtOffset_sec * 3600;    
     configTime(gmtOffset_sec,daylightOffset,ntpServer);
     // Actualizar el cliente NTP cada cierto tiempo
@@ -13,7 +13,11 @@ void startServerNtp(long gmtOffset_sec,int daylightOffset){
     struct tm timeinfo;
     if(getLocalTime(&timeinfo)){
         rtc.setTimeStruct(timeinfo);
+        Serial.println("Se ha establecido conexion");
+        return true;
     } 
+    Serial.println("No se ha establecido conexion");
+    return false;
 }
 //"%A, %B %d %Y %H:%M:%S"
 //https://cplusplus.com/reference/ctime/strftime/

@@ -3,6 +3,7 @@
 #include <WiFiUdp.h>
 #include "pantalla.h"
 
+
 // WiFi credentials
 const char* ssid = "(((Mariola)))";
 const char* password = "Resiliencia1*";

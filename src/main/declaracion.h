@@ -41,7 +41,7 @@ int ConectarWifi(char *ssid, char *password);
 void onWebSocketEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type, void *arg, uint8_t *data, size_t len);
 String getDatosDHT22(long periodo, float ajustarTemperatura, float ajustarHumedad);
 String MostrarHora(String formato, int update);
-void startServerNtp(long gmtOffset_sec,int daylightOffset);
+bool startServerNtp(long gmtOffset_sec,int daylightOffset);
 
 
 enum WifiConfigState
