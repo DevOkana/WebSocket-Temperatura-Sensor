@@ -2,7 +2,7 @@
     "config": {
         "wifi": {
             "client": {
-                "reitentos": 10,
+                "reintentos": 10,
                 "nombre": "",
                 "password": ""
             },
