@@ -8,6 +8,7 @@
 File file;
 const char* nomFileConfig = "/config.json";
 const char* rutaConfig = "/config";
+String rutaCompletaConfig ;
 
 void crearConfig(String ruta) {
   // Abrir un archivo en modo escritura
@@ -92,8 +93,8 @@ DynamicJsonDocument leerConfig(String ruta) {
   return emptyDoc;
 }
 
-void entorno(const char* nomFileConfig, const char* rutaConfig) {
-  int longitudTotal = strlen(rutaConfig) + strlen(nomFileConfig) + 1; // +1 para el carácter nulo terminador
+char* entorno(const char* nomFileConfig, const char* rutaConfig) {
+  rutaCompletaConfig = String(rutaConfig) + String(nomFileConfig);
   if (SD.exists(rutaConfig)) {
     Serial.println("La carpeta ya existe.");
   } else {
@@ -101,29 +102,26 @@ void entorno(const char* nomFileConfig, const char* rutaConfig) {
       Serial.println("Carpeta creada correctamente.");
     } else {
       Serial.println("Error al crear la carpeta.");
-      return;
+      return nullptr;
     }
-  }
-  
-  // Crear un buffer para contener la ruta completa
-  char rutaCompleta[longitudTotal];
-  // Copiar la ruta de la carpeta al buffer
-  strcpy(rutaCompleta, rutaConfig);
-  // Concatenar el nombre del archivo al buffer
-  strcat(rutaCompleta, nomFileConfig);
-
-  crearConfig(rutaCompleta);
+  }  
+  return strdup(rutaCompletaConfig.c_str()); // Devolver la ruta completa
 }
 
 void ComprobandoConfig() {
   // Verificar si el archivo existe
+  String rutaCompleta = String(rutaConfig) + String(nomFileConfig);
   if (!SD.exists(rutaConfig)) {
     Serial.println("El archivo no existe. Creándolo...");
-    entorno(nomFileConfig, rutaConfig);
+    char* rutaArchivo = entorno(nomFileConfig, rutaConfig);
+    if (rutaArchivo != nullptr) {
+      crearConfig(rutaArchivo);
+      free(rutaArchivo); // Liberar la memoria asignada
+    }
   } else {
     Serial.println("El archivo config.json ya existe.");
     Serial.println("Leyendo configuración...");
-    DynamicJsonDocument config = leerConfig(String(rutaConfig) + nomFileConfig);
+    DynamicJsonDocument config = leerConfig(rutaCompleta);
     String nombreWifi = config["config"]["wifi"]["hotspot"]["nombre"];
     Serial.print("Nombre de la red WiFi: ");
     Serial.println(nombreWifi);
@@ -131,6 +129,33 @@ void ComprobandoConfig() {
   }
 }
 
+//Si es true es solo borrar la configuración si es true borrarlo todo
+void resetDefault(int isConfig) {
+  if (isConfig == 1) {
+    // Verificar si el archivo existe
+    if (SD.exists(rutaCompletaConfig)) {
+      // Eliminar el archivo
+      if (SD.remove(rutaCompletaConfig)) {
+        Serial.println("Archivo borrado correctamente.");
+        // Verificar si la carpeta está vacía
+        if (SD.exists(rutaConfig) && !SD.exists(rutaCompletaConfig)) {
+          // Eliminar la carpeta
+          if (SD.rmdir(rutaConfig)) {
+            Serial.println("Carpeta borrada correctamente.");
+          } else {
+            Serial.println("Error al borrar la carpeta.");
+          }
+        }
+      } else {
+        Serial.println("Error al borrar el archivo.");
+      }
+    } else {
+      Serial.println("El archivo no existe.");
+    }
+  } else {
+    Serial.println("No se especificó ninguna acción.");
+  }
+}
 void setup() {
   Serial.begin(115200);
   if (!SD.begin(SD_CS_PIN)) {
@@ -139,6 +164,8 @@ void setup() {
   }  
   Serial.println("Tarjeta SD inicializada correctamente.");
   ComprobandoConfig();
+  delay(5000);
+  resetDefault(1);
 }
 
 void loop() {
