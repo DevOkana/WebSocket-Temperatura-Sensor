@@ -1,0 +1,35 @@
+{
+    "config": {
+        "wifi": {
+            "client": {
+                "reitentos": 10,
+                "nombre": "",
+                "password": ""
+            },
+            "hotspot": {
+                "nombre": "HosportTemperatura",
+                "password": ""
+            }            
+        },
+        "webSocket":{
+            "puerto": 80,
+            "rutaEscucha": "/ws"
+        },
+        "medidas":{
+            "delay" : 1000,
+            "temperatura": {
+                "ajuste": 0,
+                "unidad": "celsius(C) or fahrenheit(F)" 
+            },
+            "humedad":{
+                "ajuste": 0,
+                "unidad": "relativeHumidity(HR) or absoluteHumidity(HA)" 
+            }
+        },
+        "NTP":{
+            "delay": 1000,
+            "server" : "time.google.com",
+            "formato": "%d/%m/%y-%H:%M:%S"
+        }
+    }
+}
