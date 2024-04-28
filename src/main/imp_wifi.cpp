@@ -7,7 +7,7 @@ const char *hostpassword = "";
 
 
 //Funcion para crear un punto de acceso wifi
-void createHostport() {
+void createHotspot() {
     // Inicializar el modo de punto de acceso
     WiFi.mode(WIFI_AP);
 

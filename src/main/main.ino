@@ -8,9 +8,9 @@ int comenzar; // Declaración global de comenzar para almacenar el retorno de co
 
 long gmtOffset_sec = 1;// Poner que lo extraiga de la flash del esp32 para recordar el gmt donde esta
 int daylightOffset = 0;
-bool nptserver = false;
+bool nptServer = false;
 
-String formatoFecha = "%d/%m/%y-%H:%M:%S";
+String formatoFecha = "%d/%m/%y-%H:%M";
 
 void setup() {
   Serial.begin(115200);
@@ -18,17 +18,18 @@ void setup() {
   initPantalla();
   //En caso de que sea 0 pues crea un punto de acceso
   if(comenzar == false){
-    createHostport();
+    createHotspot();
   }
-  //Inicializa el serverwebsocker poniendolo a la escucha
+  //Inicializa el server-web-socket poniéndole a la escucha
   ws.onEvent(onWebSocketEvent);
   server.addHandler(&ws); //Pasamos los datos contenido en ws
   server.begin(); 
-  nptserver = startServerNtp(gmtOffset_sec,daylightOffset);  
+  nptServer = startServerNtp(gmtOffset_sec,daylightOffset);  
 }
 
 void loop() {
-  pantalla(MostrarHora(formatoFecha, 1000),comenzar, nptserver);
+  pantalla(MostrarHora(formatoFecha, 1000),comenzar, nptServer,getDatosDHT22TemperaturaP(0), getDatosDHT22HumedadP(0));
   //Serial.println(MostrarHora(formatoFecha, 5000));
   //Serial.println(getDatosDHT22(2000,0,0));
+  delay(60000);
 }

@@ -22,3 +22,15 @@ String getDatosDHT22(long periodo, float ajustarTemperatura, float ajustarHumeda
   delay(periodo); // El período de recolección debería ser > 1.7 segundos
   return datos;
 }
+
+String getDatosDHT22TemperaturaP(float ajustarTemperatura) {
+  float t = dht22.getTemperature() - ajustarTemperatura;
+  String temperatura = String(t, 1);
+  return temperatura;
+}
+String getDatosDHT22HumedadP(float ajustarHumedad) {
+  float h = dht22.getHumidity() - ajustarHumedad;
+  String humedad = String(h, 1);
+  return humedad;
+}
+
