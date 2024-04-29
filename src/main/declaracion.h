@@ -13,7 +13,6 @@
 #include <ArduinoJson.h>
 #include <ESP32Time.h>
 
-
 /*
 * Declaración de tiempo de espera que se usará para que el cliente le diga al sensor
 * cada cuanto tiempo quiere recibir la actualización del sensor
@@ -44,6 +43,8 @@ String MostrarHora(String formato, int update);
 bool startServerNtp(long gmtOffset_sec,int daylightOffset);
 String getDatosDHT22HumedadP(float ajustarHumedad);
 String getDatosDHT22TemperaturaP(float ajustarTemperatura);
+String MostrarHoraPantalla(String formato);
+void verificarConexionNTP(long gmtOffset_sec,int daylightOffset, bool* ntpServer);
 
 enum WifiConfigState
 {
